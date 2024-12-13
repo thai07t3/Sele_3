@@ -22,6 +22,7 @@
                     <threadCount>${threadCount}</threadCount>
                     <systemPropertyVariables>
                         <browser>${browser}</browser>
+                        <report>${report}</report>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
@@ -33,9 +34,9 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-        <parallel>tests
-        </parallel> <!-- Default parallel by: tests (other value: classes, methods, instances, false, true, none) -->
+        <parallel>tests</parallel> <!-- Default parallel by: tests -->
         <browser>chrome</browser> <!-- Default browser: chrome -->
+        <report>allure</report> <!-- Default report: allure -->
         <threadCount>3</threadCount> <!-- Default thread: 3 -->
     </properties>
 

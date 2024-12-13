@@ -1,32 +1,30 @@
 package base;
 
-import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 import utils.BrowserFactory;
 
+@Listeners(utils.TestListener.class)
 public class BaseTest {
 
-    private WebDriver driver;
+    protected WebDriver driver;
 
-    @Parameters("browser")
-    @BeforeMethod
-    public void setUp(@Optional("chrome") String browser) {
-        String browserFromMaven = System.getProperty("browser");
-        if (browserFromMaven != null && !browserFromMaven.isEmpty()) {
-            browser = browserFromMaven;
-        }
+    @BeforeSuite
+    public void setup() {
+        String browser = System.getProperty("browser", "chrome");
         driver = BrowserFactory.createDriver(browser);
-        WebDriverRunner.setWebDriver(driver);
     }
 
-    @AfterMethod
+    @AfterSuite
     public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }
