@@ -1,5 +1,6 @@
 package base;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -12,12 +13,14 @@ public class BaseTest {
     protected WebDriver driver;
 
     @BeforeSuite
+    @Step("Setup browser")
     public void setup() {
         String browser = System.getProperty("browser", "chrome");
         driver = BrowserFactory.createDriver(browser);
     }
 
     @AfterSuite
+    @Step("Close browser")
     public void tearDown() {
         if (driver != null) {
             driver.quit();
